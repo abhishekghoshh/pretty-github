@@ -1,6 +1,5 @@
 'use strict';
 
-
 class RestCall {
   constructor() {
     this.initiate();

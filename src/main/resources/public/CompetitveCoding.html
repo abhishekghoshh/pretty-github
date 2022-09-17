@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CP Questions</title>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.1.js"
+	integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"
+	integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c="
+	crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+<script src="index.js"></script>
+<script src="RestCall.js"></script>
+<link rel="stylesheet" href="index.css">
+</head>
+
+
+<body>
+	<div style="height: 5%"></div>
+	<div class="container-fluid" style="margin: 3%;">
+		<div class="row">
+			<ul class="collapsible popout one_collapsable">
+				<li id="li1">
+					<div class="collapsible-header">
+						<form class="col s12">
+							<div class="row">
+								<div class="input-field col s2" style="margin-left: 2.5%;">
+									<p>SubsetSum.java</p>
+								</div>
+								<div class="input-field col s2">
+									<select>
+										<option value="" disabled selected>Difficulty level</option>
+										<option value="easy">easy</option>
+										<option value="medium">medium</option>
+										<option value="hard">hard</option>
+									</select>
+								</div>
+								<div class="input-field col s3">
+									<div class="chips input-field">
+										<input class="input" placeholder="type">
+									</div>
+								</div>
+								<div class="input-field col s5">
+									<div class="chips input-field">
+										<input class="input" placeholder="tags">
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="collapsible-body">
+						<span>Lorem ipsum dolor sit amet.</span>
+					</div>
+				</li>
+				<li id="li2">
+					<div class="collapsible-header">
+						<i class="material-icons">place</i>Second
+					</div>
+					<div class="collapsible-body">
+						<span>Lorem ipsum dolor sit amet.</span>
+					</div>
+				</li>
+				<li id="li3">
+					<div class="collapsible-header">
+						<i class="material-icons">whatshot</i>Third
+					</div>
+					<div class="collapsible-body">
+						<span>Lorem ipsum dolor sit amet.</span>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

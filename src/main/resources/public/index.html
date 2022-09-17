@@ -45,7 +45,6 @@
 					</div>
 					<div class="input-field col s2">
 						<select id="branch">
-							<option value="master" selected>master</option>
 						</select> <label>Branches</label>
 					</div>
 				</div>
@@ -61,15 +60,15 @@
 					</div>
 					<div class="input-field col s1">
 						<a class="waves-effect waves-light btn" id="Back"><i
-							class="material-icons left">clear</i></a>
+							class="material-icons left">delete_sweep</i></a>
 					</div>
 					<div class="input-field col s6">
 						<input id="url_path" type="text" class="validate"> <label
 							for="url_path">Current path</label>
 					</div>
-					<div class="input-field col s2">
+					<div class="input-field col s1">
 						<a class="waves-effect waves-light btn" id="Back"><i
-							class="material-icons left">cloud</i>Load</a>
+							class="material-icons left">input</i></a>
 					</div>
 					<div class="input-field col s1">
 						<a class="waves-effect waves-light btn" id="Back"><i
@@ -79,55 +78,8 @@
 			</form>
 		</div>
 		<div class="row">
-			<ul class="collapsible popout one_collapsable">
-				<li id="li1">
-					<div class="collapsible-header">
-						<form class="col s12">
-      					<div class="row">
-      					<div class="input-field col s2" style="margin-left:2.5%;">
-      						<p>SubsetSum.java</p>
-      					</div>
-      					<div class="input-field col s2">
-							<select>
-								<option value="" disabled selected>Difficulty level</option>
-								<option value="easy">easy</option>
-								<option value="medium">medium</option>
-								<option value="hard">hard </option>
-							</select>
-						</div>
-						<div class="input-field col s3">
-							<div class="chips input-field">
-								<input class="input" placeholder="type">
-							</div>
-						</div>
-						<div class="input-field col s5">
-							<div class="chips input-field">
-								<input class="input" placeholder="tags">
-							</div>
-						</div>
-      					</div>
-      					</form>
-					</div>
-					<div class="collapsible-body">
-						<span>Lorem ipsum dolor sit amet.</span>
-					</div>
-				</li>
-				<li id="li2">
-					<div class="collapsible-header">
-						<i class="material-icons">place</i>Second
-					</div>
-					<div class="collapsible-body">
-						<span>Lorem ipsum dolor sit amet.</span>
-					</div>
-				</li>
-				<li id="li3">
-					<div class="collapsible-header">
-						<i class="material-icons">whatshot</i>Third
-					</div>
-					<div class="collapsible-body">
-						<span>Lorem ipsum dolor sit amet.</span>
-					</div>
-				</li>
+			<ul class="collapsible col s10 offset-s1 one_collapsable" id="tableContents">
+				
 			</ul>
 		</div>
 	</div>

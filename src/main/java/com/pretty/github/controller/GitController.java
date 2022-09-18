@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
+@Deprecated
 public class GitController {
 	private RestTemplate restTemplate = new RestTemplate();
 

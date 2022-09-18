@@ -7,8 +7,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class GithubNode {
 	private String name;
 	private String path;
-	private long size;
 	private String type;
+	private long size;
 	private String url;
 	@JsonProperty("download_url")
 	private String downloadUrl;

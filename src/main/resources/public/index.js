@@ -1,15 +1,15 @@
+let browserStack = new Array();
 $(document).ready(function() {
 	loadFromMemory();
 	loadFunctionality();
 	loadOwnerAndRepos();
-
 
 });
 function loadOwnerAndRepos() {
 	$("#ownerName").keydown(event => {
 		let restClient = new RestCall();
 		if (event.which == 13) {
-			let ownerName = $("#ownerName").val();
+			let ownerName = $("#ownerName").val().trim();
 			restClient
 				.url('/git/validuser/' + ownerName)
 				.httpMethod("GET")
@@ -66,6 +66,8 @@ function loadBranch(branch) {
 	$("#branch").html(`<option value="${branch}" selected>${branch}</option>`);
 }
 function loadTableContent(request) {
+	updateBrowserStack(request);
+	updateCurrentPath(request);
 	let restClient = new RestCall();
 	restClient.url('/git/content')
 		.httpMethod("POST")
@@ -73,14 +75,63 @@ function loadTableContent(request) {
 		.fireRestCall((parameters, statusCode, response, responseHeaders) => {
 			let html = "";
 			response.forEach(row => {
-				html = html + `<li>
-					<div class="collapsible-header">
-						<i class="material-icons">filter_drama</i><div>${row.name}</div>
-					</div>
-				</li>`;
+				html = html + createOneTableRow(row);
 			})
 			$("#tableContents").html(html);
+			rowItemOnClick();
 		});
+}
+function createOneTableRow(row) {
+	let name = row.name;
+	let type = row.type;
+	let path = row.path;
+	let size = row.size;
+	let url = row.url;
+	let downloadUrl = row.download_url;
+	let htmlUrl = row.html_url;
+	if (type == "dir") {
+		return `<li>
+				<div class="collapsible-header">
+					<i class="material-icons">folder</i><div class="oneTableRow" type="${type}" path="${path}" url="${url}" htmlUrl="${htmlUrl}">${name}</div>
+				</div>
+			</li>`;
+	} else {
+		return `<li>
+				<div class="collapsible-header">
+					<i class="material-icons">filter_drama</i><div class="oneTableRow" type="${type}" path="${path}" url="${url}" downloadUrl="${downloadUrl}" htmlUrl="${htmlUrl}" size="${size}">${name}</div>
+				</div>
+			</li>`;
+	}
+}
+function rowItemOnClick() {
+	$(".oneTableRow").click((event) => {
+		let elem = $(event.target);
+		let type = elem.attr("type");
+		let path = elem.attr("path");
+		let url = elem.attr("url");
+		if (type == "dir") {
+			loadTableContent({ directUrl: url, path: path });
+		} else {
+		}
+	});
+}
+function updateBrowserStack(request) {
+	if (browserStack.length == 0 || browserStack[browserStack.length - 1] != request.directUrl) {
+		browserStack.push(request.directUrl);
+	}
+}
+function updateCurrentPath(request) {
+	let path = getPath(request);
+	if (null != path && undefined != path) {
+		
+	}
+}
+function getPath(request) {
+	if (null == request.path || undefined == request.path) {
+		return request.directUrl.split("/contents/")[1].split("?ref=")[0];
+	} else {
+		return request.path;
+	}
 }
 function loadFromMemory() {
 	let ownerName = localStorage.getItem("ownerName");

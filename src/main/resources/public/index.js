@@ -3,6 +3,7 @@ $(document).ready(function() {
 	loadFromMemory();
 	loadFunctionality();
 	loadOwnerAndRepos();
+	addBackFunctionality();
 
 });
 function loadOwnerAndRepos() {
@@ -59,6 +60,8 @@ function onChangeReposOption() {
 		let contentUrl = $("#reposList").find(":selected").attr("value");
 		loadTableContent({ directUrl: contentUrl + "?ref=" + branch });
 
+		browserStack = new Array();
+
 		loadFunctionality();
 	});
 }
@@ -112,6 +115,7 @@ function rowItemOnClick() {
 		if (type == "dir") {
 			loadTableContent({ directUrl: url, path: path });
 		} else {
+
 		}
 	});
 }
@@ -123,7 +127,10 @@ function updateBrowserStack(request) {
 function updateCurrentPath(request) {
 	let path = getPath(request);
 	if (null != path && undefined != path) {
-		
+		$("#currentUrlPath").val(path);
+		if ("" != path.trim()) {
+			$("#currentUrlPath").next("label").addClass("active");
+		}
 	}
 }
 function getPath(request) {
@@ -155,7 +162,16 @@ function loadFunctionality() {
 	$(".collapsible-header>.col>.row>.input-field>.input-field").keydown(event => { if (event.which == 13) { event.stopPropagation(); } });
 	sortable();
 }
-
+function addBackFunctionality() {
+	$("#back").click((event) => {
+		event.stopPropagation();
+		if (browserStack.length != 0 && browserStack.length != 1) {
+			browserStack.pop();
+			let lastUrl = browserStack[browserStack.length - 1];
+			loadTableContent({ directUrl: lastUrl });
+		}
+	});
+}
 function sortable() {
 	$(".one_collapsable").sortable({
 		delay: 150,

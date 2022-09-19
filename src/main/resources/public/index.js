@@ -128,7 +128,9 @@ function loadRawContent(fileName, request) {
 		.httpMethod("POST")
 		.request(request)
 		.fireRestCall((parameters, statusCode, response, responseHeaders) => {
-			$("#rawFileContent").html(`<h5>${fileName}</h5><code>${response.content}</code>`);
+			let html = `<h5>${fileName}</h5>`;
+			response.content.split("  ").join("&emsp;").split(/\n/).map(line => `<div>${line}</div>`).forEach(line => { html = html + line; });
+			$("#rawFileContent").html(html);
 			M.Modal.getInstance($('.modal')).open();
 		});
 }

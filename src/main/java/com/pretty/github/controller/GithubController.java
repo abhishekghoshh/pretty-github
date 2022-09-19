@@ -32,4 +32,10 @@ public class GithubController {
 	public ResponseEntity getTableContent(@RequestBody Map map) {
 		return githubClient.getTableContent(map);
 	}
+
+	@SuppressWarnings("rawtypes")
+	@PostMapping("/git/raw")
+	public ResponseEntity getRawContent(@RequestBody Map map) {
+		return githubClient.rawContent(map);
+	}
 }

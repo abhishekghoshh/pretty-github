@@ -68,4 +68,12 @@ public class GithubClient {
 		return isNotBlank;
 	}
 
+	@SuppressWarnings({ "rawtypes" })
+	public ResponseEntity rawContent(Map map) {
+		ResponseEntity<String> response = restCall.get((String) map.get("rawContentUrl"), String.class);
+		Map<String, String> rawContent = new HashMap<>();
+		rawContent.put("content", response.getBody());
+		return ResponseEntity.ok(rawContent);
+	}
+
 }

@@ -101,7 +101,7 @@ function createOneTableRow(row) {
 	} else {
 		return `<li>
 				<div class="collapsible-header">
-					<i class="material-icons">filter_drama</i><div class="oneTableRow" type="${type}" path="${path}" url="${url}" downloadUrl="${downloadUrl}" htmlUrl="${htmlUrl}" size="${size}">${name}</div>
+					<i class="material-icons">filter_drama</i><div data-target="modal" class="oneTableRow" type="${type}" path="${path}" url="${url}" downloadurl="${downloadUrl}" htmlurl="${htmlUrl}" size="${size}">${name}</div>
 				</div>
 			</li>`;
 	}
@@ -109,15 +109,28 @@ function createOneTableRow(row) {
 function rowItemOnClick() {
 	$(".oneTableRow").click((event) => {
 		let elem = $(event.target);
+		let fileName = elem.html()
 		let type = elem.attr("type");
 		let path = elem.attr("path");
 		let url = elem.attr("url");
+		let downloadUrl = elem.attr("downloadurl");
 		if (type == "dir") {
 			loadTableContent({ directUrl: url, path: path });
 		} else {
+			loadRawContent(fileName, { rawContentUrl: downloadUrl });
 
 		}
 	});
+}
+function loadRawContent(fileName, request) {
+	let restClient = new RestCall();
+	restClient.url('/git/raw')
+		.httpMethod("POST")
+		.request(request)
+		.fireRestCall((parameters, statusCode, response, responseHeaders) => {
+			$("#rawFileContent").html(`<h5>${fileName}</h5><code>${response.content}</code>`);
+			M.Modal.getInstance($('.modal')).open();
+		});
 }
 function updateBrowserStack(request) {
 	if (browserStack.length == 0 || browserStack[browserStack.length - 1] != request.directUrl) {
@@ -131,6 +144,8 @@ function updateCurrentPath(request) {
 		if ("" != path.trim()) {
 			$("#currentUrlPath").next("label").addClass("active");
 		}
+	} else {
+		$("#currentUrlPath").next("label").removeClass("active");
 	}
 }
 function getPath(request) {
@@ -161,6 +176,7 @@ function loadFunctionality() {
 	$(".collapsible-header>.col>.row>.input-field").click(event => event.stopPropagation())
 	$(".collapsible-header>.col>.row>.input-field>.input-field").keydown(event => { if (event.which == 13) { event.stopPropagation(); } });
 	sortable();
+	$('.modal').modal();
 }
 function addBackFunctionality() {
 	$("#back").click((event) => {
